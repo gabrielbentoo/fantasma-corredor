@@ -75,7 +75,7 @@ function draw()
     
     // aumentar ghost.velocityY em 0.8
     ghost.velocityY += 0.8;  
-    
+    tower.y += 1;
     if(tower.y > 400)
     {
       tower.y = 300;
@@ -144,9 +144,9 @@ function spawnDoors()
     invisibleBlock.x = door.x;
     
     //adiciona a imagem doorImg à door
-    door.addImage();
+    door.addImage("door", doorImg);
     //adiciona climberImg à climber
-    climber.addImage();
+    climber.addImage("climber", climberImg);
     
     //velocidade no eixo Y de door, climber e invisibleBlock é 1
     door.velocityY = 1;
