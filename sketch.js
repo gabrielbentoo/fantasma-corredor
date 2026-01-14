@@ -47,8 +47,10 @@ function draw()
   if (gameState === "play") 
   {
     // tocar spookySound em loop
-    spookySound.play();
-    spookySound.setVolume(0.1);
+    if (!spookySound.isPlaying()) {
+      spookySound.setVolume(0.05);
+      spookySound.loop();
+    }
     //se a seta para a esquerda (left_arrow) for pressionada (keyDown)
     if(keyDown("left_arrow"))
     {
@@ -95,10 +97,10 @@ function draw()
       //destrui sprite ghost
       ghost.destroy();
       //gameState muda para o estado "end"
-      gameState = end;
+      gameState = "end";
     }
     
-    drawSprites();
+    
   }
   
   //condição para gameState igual a "end"
@@ -114,9 +116,9 @@ function draw()
     //definir tamanho do texto da mensagem de fim de jogo para 30
     textSize(30);
     //exibir o texto "Fim de Jogo" na posição x: 230, y: 250
-    Text("Fim de jogo", 230, 250)
+    text("Fim de jogo", 230, 250)
   }
-
+    drawSprites();
 }
 
 //função para criar portas (spawnDoors)
@@ -147,9 +149,9 @@ function spawnDoors()
     climber.addImage();
     
     //velocidade no eixo Y de door, climber e invisibleBlock é 1
-    door.velocityY = 
-    climber.velocityY = 
-    invisibleBlock.velocityY = 
+    door.velocityY = 1;
+    climber.velocityY = 1;
+    invisibleBlock.velocityY = 1;
     
     //profundidade de ghost é igualada à de door
      ghost.depth = door.depth;
@@ -164,11 +166,11 @@ function spawnDoors()
     invisibleBlock.lifetime = 800;
     
     //adiciona cada door (porta) ao grupo
-    doorsGroup.add();
+    doorsGroup.add(door);
     //adiciona cada climber (grade) ao grupo
-    climbersGroup.add();
+    climbersGroup.add(climber);
     //adiciona cada invisibleBlock (bloco invisível) ao grupo
-    invisibleBlockGroup.add();
+    invisibleBlockGroup.add(invisibleBlock);
     invisibleBlock.debug = true;
   }
 }
